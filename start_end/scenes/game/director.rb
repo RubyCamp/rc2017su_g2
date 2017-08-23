@@ -68,8 +68,7 @@ module Game
       @objects[shape].remove_from(@space)
       @objects.delete(shape)
       @score += 1
-      Scene.set_current_scene(:ending) if @score == @items.size - 1
-      
+      Scene.set_current_scene(:ending) if @score == @items.size - 1   
     end
 
     # 当たり判定を設定する

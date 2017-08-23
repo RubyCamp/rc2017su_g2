@@ -12,7 +12,7 @@ require_relative 'lib/base/cp_static_box'
 require_relative 'lib/wall'
 require_relative 'lib/ball'
 require_relative 'lib/box'
-require_relative 'lib/sidebar'
+#require_relative 'lib/sidebar'
 
 Window.width = 1024
 Window.height = 768

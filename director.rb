@@ -1,7 +1,6 @@
 class Director
   WALL_WIDTH = 20
   BOX_SIZE = 30
-  METER_SIZE = 0
 
   def initialize
     @space = CP::Space.new
@@ -15,27 +14,8 @@ class Director
       [0, Window.height - WALL_WIDTH, Window.width, WALL_WIDTH],              # 下壁
       [0, 0, WALL_WIDTH, Window.height - WALL_WIDTH],                         # 左壁
       [Window.width - WALL_WIDTH, 0, WALL_WIDTH, Window.height - WALL_WIDTH], # 右壁
-      [WALL_WIDTH, 200, 300, WALL_WIDTH],                                     # 障害棚その１
-      [Window.width - 300 + WALL_WIDTH, 350, 300, WALL_WIDTH]                 # 障害棚その２
     ].each do |x, y, w, h|
       add_obj(Wall.new(x, y, w, h))
-    end
-
-    add_obj(Wall.new(200, 100, 300, 20))
-    add_obj(Sidebar.new(200, 100, METER_SIZE, 20))
-
-  
-
-
-    # アイテム配置
-    [
-      [40, 150],
-      [80, 150],
-      [550, 400],
-      [590, 400],
-      [630, 400]
-    ].each do |x, y|
-      add_obj(Box.new(x, y, BOX_SIZE, BOX_SIZE))
     end
 
     # ボールの生成

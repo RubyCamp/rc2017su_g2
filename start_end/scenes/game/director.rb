@@ -15,26 +15,23 @@ module Game
         [0, Window.height - WALL_WIDTH, Window.width, WALL_WIDTH],              # 下壁
         [0, 0, WALL_WIDTH, Window.height - WALL_WIDTH],                         # 左壁
         [Window.width - WALL_WIDTH, 0, WALL_WIDTH, Window.height - WALL_WIDTH], # 右壁
-        [WALL_WIDTH, 200, 400, WALL_WIDTH],                                     # 障害棚その１
-        [Window.width - 400 + WALL_WIDTH, 450, 400, WALL_WIDTH]                 # 障害棚その２
       ].each do |x, y, w, h|
         add_obj(Wall.new(x, y, w, h))
       end
 
-      # アイテム配置
-      @items = [
-        [40, 150],
-        [80, 150],
-        [850, 400],
-        [890, 400],
-        [930, 400]
-      ]
-      @items.each do |x, y|
-        add_obj(Box.new(x, y, BOX_SIZE, BOX_SIZE))
+      [
+        [100, 230, 30, 200],
+        [300, 230, 30, 200],
+        [100, 400, 230, 30],
+      ].each do |x, y, w, h|
+        add_obj(Basket.new(x, y, w, h))
       end
 
+      @dokan=Dokan.new(50, 680, 64, 64, {image: 'images/dokan.png'})
+
       # ボールの生成
-      ball = Ball.new(500, 650, 15)
+      ball = Ball.new(50, 680, 15) #(x,y,半径)
+#      ball.dokan = @dokan
       add_obj(ball)
 
       # 各種当たり判定の定義
@@ -52,6 +49,9 @@ module Game
       # ※ @objectsに登録する全てのオブジェクトは、必ずdrawメソッドを実装していることを前提としている点に留意
       @objects.values.each {|obj| obj.draw }
       Scene.set_current_scene(:pause) if Input.key_push?(K_P)
+      @dokan.move
+      @dokan.check(Window.width,WALL_WIDTH )
+      @dokan.drag
     end
 
 

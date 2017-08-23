@@ -4,9 +4,10 @@ class Ball < CPCircle
   DEFAULT_U = 1.0
   CONTROL_SCALE_FACTOR = 3  # コントロール矢印がボールに与える加速度の補助係数
 
+  attr_accessor :dokan
+
   def initialize(x, y, r, opt = {})
     super
-
     # ボールの物理特性を設定
     self.shape.e = opt[:shape_e] || DEFAULT_E  # 弾性係数（0.0 - 1.0）
     self.shape.u = opt[:shape_u] || DEFAULT_U  # 摩擦係数（0.0 - 1.0）
@@ -79,6 +80,7 @@ class Ball < CPCircle
       scale_x: @dst / @arrow.width.to_f
     }
     Window.draw_ex(@body.p.x, @body.p.y - @arrow.height / 2, @arrow, opt)  # ここまでで得られた値から、矢印を描画
+    
   end
 
   # ドロップ時の処理内容

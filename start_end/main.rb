@@ -11,6 +11,8 @@ require_relative 'lib/base/cp_static_box'
 require_relative 'lib/wall'
 require_relative 'lib/ball'
 require_relative 'lib/box'
+require_relative 'lib/dokan'
+require_relative 'lib/basket'
 
 require_relative 'scene'
 require_relative 'scenes/opening/director'
@@ -20,6 +22,8 @@ require_relative 'scenes/pause/director'
 require_relative 'scenes/ending/director'
 require_relative 'scenes/result/director'
 
+Window.x = 0
+Window.y = 0
 Window.width = 1024
 Window.height = 768
 
@@ -31,6 +35,7 @@ Scene.add_scene(Ending::Director.new,  :ending)
 Scene.add_scene(Result::Director.new,  :result)
 
 Scene.set_current_scene(:opening)
+
 
 Window.loop do
   break if Input.key_push?(K_ESCAPE)

@@ -21,7 +21,7 @@ class CPBox < CPBase
     moment = CP::moment_for_box(mass, w, h)
 
     # Bodyオブジェクト（性質）生成
-    @body = CP::Body.new(mass, moment)
+    @body = CP::Body.new(CP::INFINITY, CP::INFINITY)
     @body.p = CP::Vec2.new(x + @w, y + @h)
 
     # Shapeオブジェクト（形状）生成

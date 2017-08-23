@@ -2,6 +2,7 @@
 class CPCircle < CPBase
   def initialize(x, y, r, opt = {})
     @r = r
+    @speed_x = 50
     mass = opt[:mass] || 1  # 質量定義
 
     # 半径値から慣性モーメントを計算
@@ -25,6 +26,19 @@ class CPCircle < CPBase
       @body.p.y - @r,
       @image,
       @body.a * 180.0 / Math::PI)
+
+      Window.draw_box_fill(50, 50, 300, 70, C_WHITE)
+      Window.draw_box_fill(50, 50, @speed_x, 70, [255, 0, 0])
+      font = Font.new(23)
+      Window.draw_font(90, 50, @speed_x.to_s, font)
+      if Input.key_down?(K_SPACE)
+          @body.v = CP::Vec2.new(rand(100), -@speed_x * 7)
+      elsif  @speed_x < 300
+        @speed_x = @speed_x + 2
+      else @speed_x = 300
+        @speed_x = 50 
+      end
+
   end
 
   private

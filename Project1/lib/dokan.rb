@@ -20,7 +20,7 @@ class  Dokan <  CPStaticBox
     @image = Image.load('images/dokan.png')
   end
   
-  attr_accessor :x,:y 
+  attr_accessor :x, :y, :deg
   
   def move
     if @move_flg == true
@@ -53,7 +53,7 @@ class  Dokan <  CPStaticBox
       end
     end
     opt = {angle: @deg}
-    puts @x,@y,opt
+    puts opt
     Window.draw_ex(@x, @y, @image, opt)
   end
 end

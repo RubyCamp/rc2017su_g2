@@ -1,6 +1,6 @@
 # 円オブジェクト
 class CPCircle < CPBase
-  def initialize(x, y, r, opt = {})
+  def initialize(x, y, r, deg, opt = {})
     @r = r
     @speed_x = 50
     mass = opt[:mass] || 1  # 質量定義
@@ -17,8 +17,12 @@ class CPCircle < CPBase
 
     # Shapeに紐付ける画像を設定
     set_image(opt[:image])
+
+    @deg = deg - 90
+
+    @is_shuted = false
   end
-  
+
  # arrt_accessor :speed_x
 
   # 描画
@@ -33,12 +37,17 @@ class CPCircle < CPBase
       Window.draw_box_fill(50, 50, @speed_x, 70, [255, 0, 0])
       font = Font.new(23)
       Window.draw_font(90, 50, @speed_x.to_s, font)
-      if Input.key_down?(K_SPACE)
-          @body.v = CP::Vec2.new(rand(100), -@speed_x * 7)
+      if Input.key_down?(K_SPACE) && !@is_shuted
+        rad = @deg *  Math::PI / 180.0
+        dx = @speed_x * 10 * Math.cos(rad)
+        dy = @speed_x * 10 * Math.sin(rad)
+        @body.v = CP::Vec2.new(dx, dy)
+        @is_shuted = true
+        puts "DEG = #{@deg}"
       elsif  @speed_x < 300
         @speed_x = @speed_x + 2
       else @speed_x = 300
-        @speed_x = 50 
+        @speed_x = 50
       end
 
   end
@@ -48,6 +57,6 @@ class CPCircle < CPBase
   # デフォルト画像の定義
   # CPBaseクラスで定義されている内容をオーバーライド。set_imageメソッドから呼ばれる
   def shape_default_image
-    Image.new(@r * 2, @r * 2).circle_fill(@r, @r, @r,C_WHITE).line(0, @r, @r, @r, C_BLACK)
+    Image.new(@r * 2, @r * 2).circle_fill(@r, @r, @r,[rand(256), rand(256), rand(256)])
   end
 end

@@ -50,7 +50,7 @@ module Game
       @objects.values.each {|obj| obj.draw }
        
        if Input.key_push?(K_SPACE)
-        ball = Ball.new(@dokan.x,@dokan.y,15)
+        ball = Ball.new(@dokan.x,@dokan.y,15, @dokan.deg)
         add_obj(ball)
        end
         

@@ -6,7 +6,7 @@ class Ball < CPCircle
 
  
 
-  def initialize(x, y, r, opt = {})
+  def initialize(x, y, r, deg, opt = {})
     super
     # ボールの物理特性を設定
     self.shape.e = opt[:shape_e] || DEFAULT_E  # 弾性係数（0.0 - 1.0）

@@ -41,17 +41,18 @@ module Game
       # 物理演算空間の時間を@speed分進める
       @space.step(@speed)
 
+
       Scene.set_current_scene(:ending) if @sec == 10
       @count += 1
       @sec = @count / 60
-        # 登録済みの全オブジェクトに対してdrawメソッドを呼び出し、画面に描画する
+      # 登録済みの全オブジェクトに対してdrawメソッドを呼び出し、画面に描画する
       # ※ @objectsに登録する全てのオブジェクトは、必ずdrawメソッドを実装していることを前提としている点に留意
       @objects.values.each {|obj| obj.draw }
        if Input.key_push?(K_SPACE)
         ball = Ball.new(@dokan.x,@dokan.y,15, @dokan.deg)
         add_obj(ball)
        end
-        
+
       Scene.set_current_scene(:pause) if Input.key_push?(K_P)
       @dokan.move
       @dokan.check(Window.width,WALL_WIDTH )
@@ -60,14 +61,12 @@ module Game
       Window.draw_font(1024 - 170, 50,"time " + (@sec.to_s), font)
     end
 
-
     private
 
     # 物理演算空間（並びに描画対象格納配列）にオブジェクトを登録
     def add_obj(obj)
       @objects[obj.shape] = obj
       obj.add_to(@space)
-      
     end
 
     # 物理演算空間（並びに描画対象格納配列）からオブジェクトを削除
@@ -75,7 +74,7 @@ module Game
       @objects[shape].remove_from(@space)
       @objects.delete(shape)
       @score += 1
-      Scene.set_current_scene(:ending) if @score == @items.size - 1   
+      Scene.set_current_scene(:ending) if @score == @items.size - 1
     end
 
     # 当たり判定を設定する

@@ -42,8 +42,8 @@ Scene.add_scene(Result::Director.new,  :result)
 
 Scene.set_current_scene(:opening)
 
-
 Window.loop do
   break if Input.key_push?(K_ESCAPE)
   Scene.play_scene
+
 end

@@ -11,7 +11,7 @@ module Game
       @count = 600
       @sec = 10
       @image = Image.load('images/Acourse.png')
-      
+
 
       # 壁の生成と登録
       [
@@ -44,7 +44,7 @@ module Game
     def play
       # 物理演算空間の時間を@speed分進める
       @space.step(@speed)
-      
+
       Window.draw(0, 0, @image)
       min_x = 999
       max_y = 0
@@ -52,7 +52,7 @@ module Game
       # 登録済みの全オブジェクトに対してdrawメソッドを呼び出し、画面に描画する
       # ※ @objectsに登録する全てのオブジェクトは、必ずdrawメソッドを実装していることを前提としている点に留意
       @objects.values.each {|obj| obj.draw }
-      
+
       if @count == 0
         @objects.values.each { |obj|
           if obj.class == Basket
@@ -87,17 +87,17 @@ module Game
       @dokan.drag
       @gauge.draw
       font = Font.new(23)
-      
+
       if @sec >= 0
         Window.draw_font(1024 - 170, 50,"time " + (@sec.to_s), font)
-      else 
+      else
         Window.draw_font(1024 - 170, 50,"time up!", font)
       end
-      
+
       if @sec < 0
         Window.draw_font(500, 300,"score " + (@score.to_s), font)
       end
-      
+
       if @sec == -5
         sleep(0)
         Scene.set_current_scene(:ending)

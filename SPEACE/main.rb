@@ -26,7 +26,7 @@ require_relative 'scenes/pause/director'
 require_relative 'scenes/ending/director'
 require_relative 'scenes/result/director'
 
-Window.x = 0 
+Window.x = 0
 Window.y = 0
 Window.width = 1024
 Window.height = 768
